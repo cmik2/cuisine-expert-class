@@ -70,9 +70,10 @@ def classify_this(classifier, review_text, restaurant_category):
     found_features = {}
     found_features=entity_features(review_text, restaurant_category)
     if (classifier.classify(found_features) == EXPERT):
-        print ("Authenticity Expoert's Review")
+        print ("CLASSIFIED AS: written by Authenticity Expert's Review")
     else:
-        print ("Non-authenticity Expoert's Review")
+        print ("CLASSIFIED AS: written by Non-authenticity Expert's Review")
+    print ("\n")
 
 def classify_with_input(classifier, restaurant_category):
     #interactively classify input text 
@@ -127,21 +128,24 @@ def main():
     size = int(len(featuresets) * 0.1)
     train_set, test_set  = featuresets[size:], featuresets[:size]
     classifier = nltk.NaiveBayesClassifier.train(train_set)
-    print("accuracy:", nltk.classify.accuracy(classifier, test_set))
+    print("\nCLASSIFY ACCURACY:", nltk.classify.accuracy(classifier, test_set))
+    print("\n")
     classifier.show_most_informative_features(5)
 
     #interactivly classify 
-    #classify_with_input(classifier, restaurant_category)
 
+    print ("\nShowing how it classifies some text....")
     input_review = "This is a great place! I am Japanese and I used to eat this type of food."
-    print ("review text:", input_review)
+    print ("\nREVIEW TEXT:", input_review)
     classify_this(classifier, input_review, restaurant_category)
     input2_review = "I love Japanese food! I can eat sushi everyday."
-    print ("review text:", input2_review)
+    print ("\nREVIEW TEXT:", input2_review)
     classify_this(classifier, input2_review, restaurant_category)
     input3_review = "Don't care for the food. Trust me - I used to live in Tokyo."
-    print ("review text:", input3_review)
+    print ("\nREVIEW TEXT:", input3_review)
     classify_this(classifier, input3_review, restaurant_category)
+
+    classify_with_input(classifier, restaurant_category)
 
 if __name__ == "__main__":
     main()

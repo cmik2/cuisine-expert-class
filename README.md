@@ -32,7 +32,12 @@ To run:
 python -m spacy download en
 python cuisineExpClassify.py
 ```
+It takes some time depending on your environment.
 
+For instance, it took almost 4 minutes on my mac.
+real	3m44.554s
+user	3m47.480s
+sys	0m22.853s
 
 ## Overview
 cuisienExpertClassifier.py
