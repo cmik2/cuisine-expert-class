@@ -12,24 +12,40 @@ categorizes the text into written by Authenticity Expert or Non-authenticity Exp
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
-GitLab:
-Using the .gitlab-ci.yml in this repository, you can run this in your gitlab environment by "run pipeline."
 
 
 GitHub:
-If you download this repository to your environment, then you can run the script by:
 
+```bash
+git clone https://github.com/cmik2/cuisine-expert-class.git
+cd cuisine-expert-class 
+```
+
+If you download this repository to your environment, then you can run the script by:
 
 ```bash
 pip install --upgrade nltk numpy spacy
 ```
+If the installation failed due file/directory permission, you may want to do the following command instead:
+
+```bash
+sudo pip install --upgrade nltk numpy spacy
+```
+
+GitLab:
+Using the .gitlab-ci.yml in this repository, you can run this in your gitlab environment by "run pipeline."
 
 ## Usage
 
 To run:
 
+First load the spaCy module by:
+
 ```python
 python -m spacy download en
+```
+Then you can run the classifier as follows:
+```python
 python cuisineExpClassify.py
 ```
 It takes some time depending on your environment.
