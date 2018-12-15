@@ -46,8 +46,51 @@ python cuisineExpClassify.py
 ```
 It takes some time depending on your environment.
 
-For instance, it took almost 4 minutes on my mac.
+For instance, it took almost 6 minutes on my mac.
 
+Then you will see the output similar to the one below, showing:
+
+1. classify accuracy
+2. Rate adjuments example based on the test data in ./data/test
+3. Examples of the text classification
+4. Interactive session to take input and classfiy it
+
+```python
+CLASSIFY ACCURACY: 0.9411764705882353
+
+
+Most Informative Features
+ contains(live in Japan) = 'GPE'            EXPT : NOEX   =      7.2 : 1.0
+contains(am not Japanese) = 'NORP'           EXPT : NOEX   =      3.1 : 1.0
+contains(! Great Japanese) = 'NORP'           EXPT : NOEX   =      3.1 : 1.0
+ contains(back to Japan) = None             NOEX : EXPT   =      1.1 : 1.0
+ contains(back in Japan) = None             NOEX : EXPT   =      1.0 : 1.0
+
+Rate adjustment using test data
+# of reviews: 20
+current star rating: 4
+star rating only by EXPERTS: 2
+star rating adjusted (EXP:NOEXP=7:3) 3
+
+Showing how it classifies some text....
+
+REVIEW TEXT: This is a great place! I am Japanese and I used to eat this type of food.
+CLASSIFIED AS: written by Authenticity Expert's Review
+
+
+
+REVIEW TEXT: I love Japanese food! I can eat sushi everyday.
+CLASSIFIED AS: written by Non-authenticity Expert's Review
+
+
+
+REVIEW TEXT: Don't care for the food. Trust me - I used to live in Tokyo.
+CLASSIFIED AS: written by Authenticity Expert's Review
+
+
+Do you want to try this classifier? (y/n)
+n
+```
 ## Overview
 
 ### Motivation of this project:

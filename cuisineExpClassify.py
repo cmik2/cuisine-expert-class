@@ -132,6 +132,33 @@ def main():
     print("\n")
     classifier.show_most_informative_features(5)
 
+    #rate adjustment
+    data_path_test = './data/test/'
+    onlyfiles = [f for f in listdir(data_path_test) if isfile(join(data_path_test, f))]
+    tagged_ratings = []
+    for f in onlyfiles:
+        with open(data_path_test + f, 'rU', newline='', encoding='utf-8') as csvfile:
+            reviews = csv.reader(csvfile, delimiter=',', quotechar='"')
+            for raw in reviews:
+                found_features = {}
+                found_features=entity_features(raw[1], restaurant_category)
+                tagged_ratings.append((raw[2], classifier.classify(found_features)))
+        csvfile.close()
+    print ("\nRate adjustment using test data")
+    print ("# of reviews:",len(tagged_ratings))
+    num_reviews = len(tagged_ratings)  
+    sum_rating = 0
+    sum_exp_rating = 0
+    num_exp = 0
+    for elem in tagged_ratings:
+        sum_rating += int(elem[0])
+        if (elem[1] == EXPERT):
+            sum_exp_rating += int(elem[0]) 
+            num_exp += 1 
+    print ("current star rating:", int(sum_rating/num_reviews))
+    print ("star rating only by EXPERTS:", int(sum_exp_rating/num_exp))
+    print ("star rating adjusted (EXP:NOEXP=7:3)",int(((sum_exp_rating/num_exp)*0.7) + (((sum_rating - sum_exp_rating)/(num_reviews-num_exp))*0.3)))
+
     #interactivly classify 
 
     print ("\nShowing how it classifies some text....")
