@@ -93,17 +93,8 @@ n
 ```
 ## Overview
 
-### Motivation of this project:
-When choosing restaurants, I always rely on Yelp ratings. The most ratings are helpful; however, when it comes to my
-native country's food, I had more misses than hits in the restaurant selection.  Some highly rated restaurants cannot
-deliver the essential elements of the cuisine right. I don't want people to think that this is quintessential of my
-country's cuisine through these restaurants. On the same note,  when I choose restaurants specialized in a specific
-cuisine, I want reviews and ratings by the people who know about the cuisine. When looking for a good Dim Sum place, I
-would like to hear from someone from Hong Kong telling us if the restaurant serves decent Dim Sum. If we have ratings by people who can judge the cuisine's authenticity, it helps us foodies and cuisine-adventure seekers in restaurant selections.
-
-### Goal of this project:
-Initially, my goal was to adjust the ratings of the cuisine restaurants based on reviewers who have the authenticity experience with the cuisine. However, during the data design and analysis phase, I discovered that there were no reviewers who reveal their background and ethnicity in 1000 reviews of my target restaurants, leaving me no rating adjustment necessary.  Thus, my project remains in classification only, no rate adjustments.
-
+### Motivation and Goal of this project:
+When choosing restaurants, I always rely on Yelp ratings. The most ratings are helpful; however, when it comes to my native country's food, I had more misses than hits in the restaurant selection.  Some highly rated restaurants cannot deliver the essential elements of the cuisine right. For Yelp users who seek for authentic cuisien  experiences, it helps to have ratings influenced by the people who know about the cuisine. Since Yelp does not disclose their users background or ethiniticies, we can find those people by analyzing their reviews to see if they are considered to be the cuisine expert. Using those experts' ratings, we can adjust the overall ratings or show authenticiy expert ratings.  
 ## Implementation Notes
 
 ### Approach:
@@ -134,6 +125,10 @@ These data sets are created sololy for the purpose of this project. Please don't
 First, I tried to use Yelp's academic dataset for the reviews. However, the review data is so voluminous and is a mixture of all the business categories. I needed more controlled sample data. Thus I decided to extract restaurant reviews from the web using parse_hub.com to create my sample data. A target restaurant is a popular Japanese restaurant serving Sushi.
 
 Analyzing the data from the web, I noticed that many reviewers were commenting about the authenticities of the food but none of them mentioned their background or nationalities, my criteria for this classification.
+
+Initially, my goal was to adjust the ratings of the cuisine restaurants based on reviewers who have the authenticity
+experience with the cuisine. However, during the data design and analysis phase, I discovered that there were no
+reviewers who reveal their background and ethnicity in 1000 reviews of my target restaurants.
 
 Questions raised during the analysis -  Is it merely that we don't have enough people traveled to Japan or from Japan? This restaurant is in the area where we have a good number of Japanese communities and business hubs for many companies with business in Japan. We should have many people who can be an authenticity expert. Perhaps, do we have differences in reviewers' behaviors based on cuisines and types of foods?  Would reviewers want to comment more about background experience depending on the cuisine such as Chinese food, Mexican food over Japanese food? How about Dim Sum over Sushi or Ramen?
 
