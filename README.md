@@ -58,7 +58,7 @@ sys	0m22.853s
 When choosing restaurants, I always rely on Yelp ratings. The most ratings are helpful; however, when it comes to my
 native country's food, I had more misses than hits in the restaurant selection.  Some highly rated restaurants cannot
 deliver the essential elements of the cuisine right. I don't want people to think that this is quintessential of my
-country's cuisine through these restaurants! On the same note,  when I choose restaurants specialized in a specific
+country's cuisine through these restaurants. On the same note,  when I choose restaurants specialized in a specific
 cuisine, I want reviews and ratings by the people who know about the cuisine. When looking for a good Dim Sum place, I
 would like to hear from someone from Hong Kong telling us if the restaurant serves decent Dim Sum. If we have ratings by people who can judge the cuisine's authenticity, it helps us foodies and cuisine-adventure seekers in restaurant selections.
 
