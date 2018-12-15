@@ -55,7 +55,9 @@ sys	0m22.853s
 ## Overview
 
 ### Motivation of this project:
-When choosing restaurants, I always count on Yelp for the ratings and reviewers' comments, just like any other millions of the users.  Reading reviews to select a good Dim Sum restaurant nearby, I came across some reviews stating that the reviewer is from Hong Kong and the restaurant offers decent Dim Sum, making feel to try the restaurant.  I am an expert in a particular cuisine. I have gone to highly rated restaurants for my cuisine and found out that the essential elements of the cuisine were not delivered properly.
+When choosing restaurants, I always count on Yelp for the ratings and reviewers' comments, just like any other millions
+of the users.  Reading reviews to select a good Dim Sum restaurant nearby, I came across some reviews stating that the
+reviewer is from Hong Kong and the restaurant offers decent Dim Sum just like in Hong Kong, making feel to try the restaurant.  I am an expert in a particular cuisine. I have gone to highly rated restaurants for my cuisine and found out that the essential elements of the cuisine were not delivered properly.
 
 ### Goal of this project:
 Initially, my goal was to adjust the ratings of the cuisine restaurants based on reviewers who have the authenticity experience with the cuisine. I hope to help the foodies and foodies like in search for their authentic cuisine experiences.  During the data design and analysis phase, however, I discovered that there were no reviewers who reveal their background and ethnicity in 1000 reviews of my target restaurants, leaving me no rating adjustment necessary.  Thus, my project remains in classification only, no rate adjustments.
