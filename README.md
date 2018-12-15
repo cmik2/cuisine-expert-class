@@ -126,4 +126,4 @@ Although there is a hook to support different cuisines, it must include corpus t
 If there are enough self-proclaimed authenticity experts data-mined in the reviews, we can use this classifier to adjust restaurant ratings weighing their ratings.
 
 ## Contribution
-Produced for a class project by C. Miklasevich, an MCS-DS student at UIUC:1
+Produced for a class project by C. Miklasevich, an MCS-DS student at UIUC
