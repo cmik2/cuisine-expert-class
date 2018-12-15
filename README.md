@@ -63,7 +63,7 @@ cuisine, I want reviews and ratings by the people who know about the cuisine. Wh
 would like to hear from someone from Hong Kong telling us if the restaurant serves decent Dim Sum. If we have ratings by people who can judge the cuisine's authenticity, it helps us foodies and cuisine-adventure seekers in restaurant selections.
 
 ### Goal of this project:
-Initially, my goal was to adjust the ratings of the cuisine restaurants based on reviewers who have the authenticity experience with the cuisine. I hope to help the foodies and foodies like in search for their authentic cuisine experiences.  During the data design and analysis phase, however, I discovered that there were no reviewers who reveal their background and ethnicity in 1000 reviews of my target restaurants, leaving me no rating adjustment necessary.  Thus, my project remains in classification only, no rate adjustments.
+Initially, my goal was to adjust the ratings of the cuisine restaurants based on reviewers who have the authenticity experience with the cuisine. However, during the data design and analysis phase, I discovered that there were no reviewers who reveal their background and ethnicity in 1000 reviews of my target restaurants, leaving me no rating adjustment necessary.  Thus, my project remains in classification only, no rate adjustments.
 
 ## Implementation Notes
 
