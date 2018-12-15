@@ -47,16 +47,17 @@ python cuisineExpClassify.py
 It takes some time depending on your environment.
 
 For instance, it took almost 4 minutes on my mac.
+
 real	3m44.554s
 user	3m47.480s
 sys	0m22.853s
 
 ## Overview
 
-Motivation of this project:
+### Motivation of this project:
 When choosing restaurants, I always count on Yelp for the ratings and reviewers' comments, just like any other millions of the users.  Reading reviews to select a good Dim Sum restaurant nearby, I came across some reviews stating that the reviewer is from Hong Kong and the restaurant offers decent Dim Sum, making feel to try the restaurant.  I am an expert in a particular cuisine. I have gone to highly rated restaurants for my cuisine and found out that the essential elements of the cuisine were not delivered properly.
 
-Goal of this project:
+### Goal of this project:
 Initially, my goal was to adjust the ratings of the cuisine restaurants based on reviewers who have the authenticity experience with the cuisine. I hope to help the foodies and foodies like in search for their authentic cuisine experiences.  During the data design and analysis phase, however, I discovered that there were no reviewers who reveal their background and ethnicity in 1000 reviews of my target restaurants, leaving me no rating adjustment necessary.  Thus, my project remains in classification only, no rate adjustments.
 
 ## Implementation Notes
@@ -110,7 +111,8 @@ Logic: if token is either GTE or NORP for the particular cuisine, make annotatio
 
 After many iterative processes in adjusting sample data and feature extraction annotations/tagging, I ended up with the simple logic above.
 
-When encountering a GTE or NORP token, I was looking for phrases like "live in Japan" by checking POS patterns of Verb + Preposition + GTE token. With typical programming attitude to strive for 100% code coverage, I was even qualifying what the preposition should. This mentality caused overfitting issues during the classification, and it could not classify beyond "live in Japan".  After resolving the overfitted issue, the classifier started to show accuracy between 0.7 and 0.9. It could be trained better with more sample data.
+When encountering a GTE or NORP token, I was looking for phrases like "live in Japan" by checking POS patterns of Verb +
+Preposition + GTE token. With typical programming attitude to strive for 100% code coverage, I was even qualifying/defining what the preposition should be. This mentality caused overfitting issues during the classification, and it could not classify beyond "live in Japan".  After resolving the overfitted issue, the classifier started to show accuracy between 0.7 and 0.9. It could be trained better with more sample data.
 
 ### Future implementation and extension
 Although there is a hook to support different cuisines, it must include corpus to define the appropriate countries of the cuisines and their cities. 
