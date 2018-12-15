@@ -48,8 +48,8 @@ It takes some time depending on your environment.
 
 For instance, it took almost 4 minutes on my mac.
 
-real	3m44.554s
-user	3m47.480s
+real	3m44.554s *separate paragraph*
+user	3m47.480s*separate paragraph*
 sys	0m22.853s
 
 ## Overview
@@ -73,8 +73,8 @@ This is a text categorization problem. I need to define a feature extractor look
 ### Qualifying Phrases:
 Generally speaking, restaurant reviewers' background and ethnicities are not publicly shared due to the policies of review-providing companies. However, some reviewers willingly comment about their background to establish their credentials as a "cuisine-authenticity" expert. This classifier is looking for the self-proclaiming phrases such as:
 
-"I used to live in Tokyo and go to sushi places a lot. ....This place has awesome sushi!"
-"I am Japanese. I can tell when I see good Japanese food."
+"I used to live in Tokyo and go to sushi places a lot. ....This place has awesome sushi!"*separate paragraph*
+"I am Japanese. I can tell when I see good Japanese food."*separate paragraph*
 
 With this approach, I define the feature extraction function for this classifier.
 
@@ -82,8 +82,8 @@ With this approach, I define the feature extraction function for this classifier
 
 Two sets of sample data are under the installation directory:
 
-data/expert      -- Sample Expert Reviews
-data/nonexpert   -- Sample Non-expert Reviews
+data/expert      -- Sample Expert Reviews*separate paragraph*
+data/nonexpert   -- Sample Non-expert Reviews *separate paragraph*
 
 These data sets are created sololy for the purpose of this project. Please don't use them outside of this classifier.
 
