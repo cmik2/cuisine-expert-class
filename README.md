@@ -125,7 +125,7 @@ data/nonexpert   -- Sample Non-expert Reviews
 
 These data sets are created sololy for the purpose of this project. Please don't use them outside of this classifier.
 
-the data input format is in CSV. Each review is in the following format: 
+The data input format is in CSV. Each review is in the following format: 
 
 
 "reviewer name","review text","star rating" 
