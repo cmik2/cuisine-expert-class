@@ -38,7 +38,7 @@ def load_geo_words():
     For this project, just work with 'japanese' only
     """
 
-    geo_words['japanese'] = ('japan', 'japanese', 'tokyo', 'osaka', 'yokohama', 'okinawa', 'kyoto', 'nara', 'harajuku', 'shibuya','ginza') 
+    geo_words['japanese'] = ('japan', 'japanese', 'tokyo', 'osaka', 'yokohama', 'hiroshima', 'nagasaki', 'okinawa', 'kyoto', 'nara', 'harajuku', 'shibuya','ginza') 
     geo_words['chinese'] = ('china', 'beijing', 'shanghai', 'hong kong') 
 
 def entity_features(raw, cuisine_type):
