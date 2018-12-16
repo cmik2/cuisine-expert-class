@@ -148,7 +148,7 @@ To categorize the reviews, I need Natural Language Processing(NLP) utilities to 
 
 spaCy -- to parse and tokenize the text to tag each token with lexical POS and ER information
 
-nltk -- modeling classifier and train the data
+nltk -- modeling classifier and train the data using the NaiveBayes classifier
 
 Initially, nltk was the only choice for NLP. However, after feeding through raw
 texts from my sample data, I found that:
