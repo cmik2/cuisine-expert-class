@@ -104,8 +104,11 @@ This is a text categorization problem. I need to define a feature extractor look
 Generally speaking, restaurant reviewers' background and ethnicities are not publicly shared due to the policies of review-providing companies. However, some reviewers willingly comment about their background to establish their credentials as a "cuisine-authenticity" expert. This classifier is looking for the self-proclaiming phrases such as:
 
 "I used to live in Tokyo and go to sushi places a lot. ....This place has awesome sushi!"
+
 "I am Japanese. I can tell when I see good Japanese food.
+
 "I have visted Japan many times. I can tell when I see good Japanese food.
+
 
 With this approach, I define the feature extraction function for this classifier.
 
@@ -144,7 +147,7 @@ nltk -- modeling classifier and train the data
 Initially, nltk was the only choice for NPL. However, after feeding through raw
 texts from my sample data, I found that:
 
-1. Simple tokens had wrong Entity Recognition Tag GTE/NORP.
+1. Simple tokens had wrong Entity Recognition Tag.
 2. nltk's POS tags were too extensive. Instead of having 5 different verb tags based on its use, all I needed is just one tag for "VERB".
 
 After researching in the other NLP options, I decided to use spaCY for the NLP parsing of the text.
@@ -155,12 +158,12 @@ Logic: if token is either GTE or NORP for the particular cuisine, make annotatio
 
 After many iterative processes in adjusting sample data and feature extraction annotations/tagging, I ended up with the simple logic above.
 
-When encountering a GTE or NORP token, I was looking for phrases like "live in Japan" by checking POS patterns of Verb +
+When finding tokens with Entity Recognition tags such as GTE (tagged for Japan)  or NORP (tagged for Japanese), I was looking for phrases like "live in Japan" by checking POS patterns of Verb +
 Preposition + GTE token. With typical programming attitude to strive for 100% code coverage, I was even
 qualifying/defining what the preposition should be. This mentality caused overfitting issues during the classification, and it could not classify beyond "live in Japan".  After resolving the overfitted issue, the classifier started to show accuracy between 0.7 and 0.9. It shows the training model behavior: more sample data, better the accuracy. 
 
 ### Future implementation and extension
-1. Although there is a hook to support different cuisines, it must include corpus to define the appropriate countries of the cuisines and their cities.  
+1. Although there is a hook to support different cuisines, it must include corpus to define the appropriate countries of the cuisines and their cities.
 
 2. I need to investigate if we have enough self-proclaimed authenticity experts in the production environment. If not, the overall ratings remain the same without reflecting authenticity consideration.  
 
