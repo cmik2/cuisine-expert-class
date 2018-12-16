@@ -1,12 +1,11 @@
 # Cuisine Authenticity Expert Finder
-This classifier is an outcome of a text analysis class project.
+This classifier was created for a class project of my text analysis class.
 
-It classifies restaurant reviews in text format into two categories: text written by an authenticity expert (EXPT) and by a non-authenticity expert
-(NOEX).
+It classifies restaurant reviews into two categories: text written by a cuisine authenticity expert (EXPT) and text written by a non cuisine-authenticity expert (NOEX).
 
-Using the text categorization technique with the help of Entity Recognition tagging, this classifier probabilistically categorizes the text into EXPT and NOEX.
+Definition of the "cuisine authenticity" expert is a person who has lived or traveled to the country of the particular cuisine or a native to the country. Furthermore, this background/nationality information can be found in their restaurant reviews from the public web. Thus, the "cuisine authenticity" experts are self-proclaimed within their reviews.
 
-NOTE: fot the initial version, the supported cuisine type is Japanese only.
+NOTE: for the initial version, the supported cuisine type is Japanese only.
 
 Please see the Overview and Implementation sections for details.
 
@@ -51,7 +50,7 @@ For instance, it took almost 6 minutes on my mac.
 Then you will see the output similar to the one below, showing:
 
 1. classify accuracy
-2. Rate adjuments example based on the test data in ./data/test
+2. Rate adjuments example based on the test data in ./data/test weighted in the 7:3 ration between EXPT and NOEX
 3. Examples of the text classification
 4. Interactive session to take input and classfiy it
 
@@ -94,18 +93,19 @@ n
 ## Overview
 
 ### Motivation and Goal of this project:
-When choosing restaurants, I always rely on Yelp ratings. The most ratings are helpful; however, when it comes to my native country's food, I had more misses than hits in the restaurant selection.  Some highly rated restaurants cannot deliver the essential elements of the cuisine right. For Yelp users who seek for authentic cuisien  experiences, it helps to have ratings influenced by the people who know about the cuisine. Since Yelp does not disclose their users background or ethiniticies, we can find those people by analyzing their reviews to see if they are considered to be the cuisine expert. Using those experts' ratings, we can adjust the overall ratings or show authenticiy expert ratings.  
+When choosing restaurants, I always rely on Yelp ratings. The most ratings are helpful; however, when it comes to my native country's food, some of the highly rated restaurants are not quite authentic enough for my native palate. For Yelp users who seek true authentic cuisine experiences, I hope to provide different ratings or adjusted ratings based on the self-proclaimed experts in consideration of the cuisine authenticity.
+
 ## Implementation Notes
 
 ### Approach:
 This is a text categorization problem. I need to define a feature extractor looking for certain qualifying phrases and train the classifier with the sample data.
 
-### Qualifying Phrases:
+### Qualifying Phrases (i.e. matching patterns):
 Generally speaking, restaurant reviewers' background and ethnicities are not publicly shared due to the policies of review-providing companies. However, some reviewers willingly comment about their background to establish their credentials as a "cuisine-authenticity" expert. This classifier is looking for the self-proclaiming phrases such as:
 
 "I used to live in Tokyo and go to sushi places a lot. ....This place has awesome sushi!"
-
 "I am Japanese. I can tell when I see good Japanese food.
+"I have visted Japan many times. I can tell when I see good Japanese food.
 
 With this approach, I define the feature extraction function for this classifier.
 
@@ -122,17 +122,17 @@ data/nonexpert   -- Sample Non-expert Reviews
 
 These data sets are created sololy for the purpose of this project. Please don't use them outside of this classifier.
 
+the data input format is in CSV. Each review is in the following format: 
+
+
+"reviewer name","review text","star rating" 
+
+
 First, I tried to use Yelp's academic dataset for the reviews. However, the review data is so voluminous and is a mixture of all the business categories. I needed more controlled sample data. Thus I decided to extract restaurant reviews from the web using parse_hub.com to create my sample data. A target restaurant is a popular Japanese restaurant serving Sushi.
 
-Analyzing the data from the web, I noticed that many reviewers were commenting about the authenticities of the food but none of them mentioned their background or nationalities, my criteria for this classification.
+Analyzing the data from the web, I noticed that many reviewers were commenting about the authenticities of the food but none of them mentioned their background or nationalities, my criteria for this classification. Thus, I needed to interject my qualifying phrases to create the sample data.
 
-Initially, my goal was to adjust the ratings of the cuisine restaurants based on reviewers who have the authenticity
-experience with the cuisine. However, during the data design and analysis phase, I discovered that there were no
-reviewers who reveal their background and ethnicity in 1000 reviews of my target restaurants.
-
-Questions raised during the analysis -  Is it merely that we don't have enough people traveled to Japan or from Japan? This restaurant is in the area where we have a good number of Japanese communities and business hubs for many companies with business in Japan. We should have many people who can be an authenticity expert. Perhaps, do we have differences in reviewers' behaviors based on cuisines and types of foods?  Would reviewers want to comment more about background experience depending on the cuisine such as Chinese food, Mexican food over Japanese food? How about Dim Sum over Sushi or Ramen?
-
-If we don't have enough reviewers self-proclaiming their background and ethnicities, there is no validity for this classification. This needs to be studied separately. For this project, I add the self-proclaiming phrases into the sample data to move on to the implementation phase.
+Although I scraped 700 records from the web, I only used 340 records to train the classifier. It was too time-consuming to create the samples for 700 records and made the python script run for more than more than 10 minutes for the amount. 
 
 ### Tool choices:
 To categorize the reviews, I need Part of Speech to tokenize the self-proclaimed phrases and Entity Recognition information (e.g., Japan, Japanese). To do so, I use:
@@ -156,12 +156,13 @@ Logic: if token is either GTE or NORP for the particular cuisine, make annotatio
 After many iterative processes in adjusting sample data and feature extraction annotations/tagging, I ended up with the simple logic above.
 
 When encountering a GTE or NORP token, I was looking for phrases like "live in Japan" by checking POS patterns of Verb +
-Preposition + GTE token. With typical programming attitude to strive for 100% code coverage, I was even qualifying/defining what the preposition should be. This mentality caused overfitting issues during the classification, and it could not classify beyond "live in Japan".  After resolving the overfitted issue, the classifier started to show accuracy between 0.7 and 0.9. It could be trained better with more sample data.
+Preposition + GTE token. With typical programming attitude to strive for 100% code coverage, I was even
+qualifying/defining what the preposition should be. This mentality caused overfitting issues during the classification, and it could not classify beyond "live in Japan".  After resolving the overfitted issue, the classifier started to show accuracy between 0.7 and 0.9. It shows the training model behavior: more sample data, better the accuracy. 
 
 ### Future implementation and extension
-Although there is a hook to support different cuisines, it must include corpus to define the appropriate countries of the cuisines and their cities. 
+1. Although there is a hook to support different cuisines, it must include corpus to define the appropriate countries of the cuisines and their cities.  
 
-If there are enough self-proclaimed authenticity experts data-mined in the reviews, we can use this classifier to adjust restaurant ratings weighing their ratings.
+2. I need to investigate if we have enough self-proclaimed authenticity experts in the production environment. If not, the overall ratings remain the same without reflecting authenticity consideration.  
 
 ## Contribution
 Produced for a class project by C. Miklasevich, an MCS-DS student at UIUC
