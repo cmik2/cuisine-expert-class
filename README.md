@@ -36,7 +36,7 @@ sudo pip install --upgrade nltk numpy spacy
 
 To run:
 
-First, load spaCy's English module shown below. This may not be required but, in some environment (i.e., gitlab), you need to this step: 
+First, load spaCy's English module shown below. This may not be required but, in some environment (i.e., gitlab), you need this step: 
 
 ```python
 python -m spacy download en
@@ -47,12 +47,15 @@ python cuisineExpClassify.py
 ```
 It takes a few minutes before you see any display. For instance, it took almost 10 minutes on my mac.
 
-Then you will see the output similar to the one below:
-
+Then you will see the following information:
 1. classify accuracy
 2. Rate adjuments example based on the test data in ./data/test weighted in the 7:3 ration between EXPT and NOEX
 3. Examples of the text classification
 4. Interactive session to take input and classfiy it
+
+
+
+Below is the sample output:
 
 ```python
 CLASSIFY ACCURACY: 0.9411764705882353
