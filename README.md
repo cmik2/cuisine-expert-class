@@ -3,13 +3,15 @@ This classifier was created for a class project of my text analysis class.
 
 It classifies restaurant reviews into two categories: text written by a cuisine authenticity expert (EXPT) and text written by a non cuisine-authenticity expert (NOEX).
 
-Definition of the "cuisine authenticity" expert is a person who has lived or traveled to the country of the particular cuisine or a native to the country. Furthermore, this background/nationality information can be found in their restaurant reviews from the public web. Thus, the "cuisine authenticity" experts are self-proclaimed within their reviews.
+For this project, the definition of the "cuisine authenticity" expert is a person who has lived or traveled to the country of the particular cuisine or a native of the country -- anyone who has first-hand experience in the cuisine. Furthermore, this background/nationality information comes from their restaurant reviews on the public web. Thus, the "cuisine authenticity" experts are self-proclaimed within their reviews.
 
 NOTE: for the initial version, the supported cuisine type is Japanese only.
 
 Please see the Overview and Implementation sections for details.
 
 ## Installation
+
+NOTE: The information below applies to the Mac OS environment. Adjust it to your environment as needed. 
 
 Download the project from git as follows:
 
@@ -24,7 +26,7 @@ Next, using [pip](https://pip.pypa.io/en/stable/) to install the required packag
 pip install --upgrade nltk numpy spacy
 ```
 
-If the installation failed due file/directory permission, you may want to do the following command instead:
+If the installation failed due to file/directory permissions, you may want to do the following command instead:
 
 ```bash
 sudo pip install --upgrade nltk numpy spacy
@@ -34,7 +36,7 @@ sudo pip install --upgrade nltk numpy spacy
 
 To run:
 
-First load the spaCy module by:
+First, load spaCy's English module shown below. This may not be required but, in some environment (i.e., gitlab), you need to this step: 
 
 ```python
 python -m spacy download en
@@ -43,11 +45,9 @@ Then you can run the classifier as follows:
 ```python
 python cuisineExpClassify.py
 ```
-It takes some time depending on your environment.
+It takes a few minutes before you see any display. For instance, it took almost 10 minutes on my mac.
 
-For instance, it took almost 6 minutes on my mac.
-
-Then you will see the output similar to the one below, showing:
+Then you will see the output similar to the one below:
 
 1. classify accuracy
 2. Rate adjuments example based on the test data in ./data/test weighted in the 7:3 ration between EXPT and NOEX
@@ -90,6 +90,9 @@ CLASSIFIED AS: written by Authenticity Expert's Review
 Do you want to try this classifier? (y/n)
 n
 ```
+
+According to the displayed classifying samples, try typing your text to see how it classify your text your text. After each text input, type 'y' to continue or 'n' to quit the script. 
+
 ## Overview
 
 ### Motivation and Goal of this project:
@@ -131,41 +134,45 @@ The data input format is in CSV. Each review is in the following format:
 "reviewer name","review text","star rating" 
 
 
-First, I tried to use Yelp's academic dataset for the reviews. However, the review data is so voluminous and is a mixture of all the business categories. I needed more controlled sample data. Thus I decided to extract restaurant reviews from the web using parse_hub.com to create my sample data. A target restaurant is a popular Japanese restaurant serving Sushi.
+First, I tried to use Yelp's academic dataset for the reviews. However, the review data is so voluminous and is a mixture of all the business categories. I needed more controlled sample data. Thus I decided to extract restaurant reviews from the web using parse_hub.com to create my sample data. A target restaurant is a popular Japanese restaurant.
 
-Analyzing the data from the web, I noticed that many reviewers were commenting about the authenticities of the food but none of them mentioned their background or nationalities, my criteria for this classification. Thus, I needed to interject my qualifying phrases to create the sample data.
+Analyzing the data from the web, I noticed that many reviewers were commenting about the authenticities of the food but none of them mentioned their background or nationalities, my criteria for this classification. Thus, I needed to interject my qualifying phrases into the raw data to create the sample data.
 
 Although I scraped 700 records from the web, I only used 340 records to train the classifier. It was too time-consuming to create the samples for 700 records and made the python script run for more than more than 10 minutes for the amount. 
 
 ### Tool choices:
-To categorize the reviews, I need Part of Speech to tokenize the self-proclaimed phrases and Entity Recognition information (e.g., Japan, Japanese). To do so, I use:
+To categorize the reviews, I need Natural Language Processing(NLP) utilities to obtain Part of Speech(POS) to tokenize the self-proclaimed phrases and Entity Recognition(ER) information (e.g., Japan, Japanese). To do so, I use:
 
-spaCy -- parsing of text using the Natural Language Processing (NLP) approach to tokenize the text with POS and Entity Recognition tagging
+spaCy -- to parse and tokenize the text to tag each token with lexical POS and ER information
 
 nltk -- modeling classifier and train the data
 
-Initially, nltk was the only choice for NPL. However, after feeding through raw
+Initially, nltk was the only choice for NLP. However, after feeding through raw
 texts from my sample data, I found that:
 
-1. Simple tokens had wrong Entity Recognition Tag.
-2. nltk's POS tags were too extensive. Instead of having 5 different verb tags based on its use, all I needed is just one tag for "VERB".
+1. Simple tokens had wrong Entity Recognition tag in nltk. (e.g., "Hello" was tagged as country)
+2. nltk's POS tags were too extensive. Instead of having 5 different verb tags based on its use, all I needed was just "VERB".
 
-After researching in the other NLP options, I decided to use spaCY for the NLP parsing of the text.
-With one function call, it can parse and tag POS and ER. POS Tags are simple "VERB",  "ADP", and such. I can access tokens by simple index.
+After some researching, I decided to use spaCY for the NLP parsing.  With one function call, spaCy can parse and tag POS and ER. POS Tags are simple tag such as  "VERB" and  "ADP". Also I can access tokens easily by simple index.
 
 ### Feature Extraction
-Logic: if token is either GTE or NORP for the particular cuisine, make annotation as ((token.left).left) + token.left + token
+
+The logic of the feature extractor is as follows:
+
+
+if token is either GTE or NORP for the particular cuisine, make annotation as ((token.left).left) + token.left + token
+
 
 After many iterative processes in adjusting sample data and feature extraction annotations/tagging, I ended up with the simple logic above.
 
-When finding tokens with Entity Recognition tags such as GTE (tagged for Japan)  or NORP (tagged for Japanese), I was looking for phrases like "live in Japan" by checking POS patterns of Verb +
-Preposition + GTE token. With typical programming attitude to strive for 100% code coverage, I was even
-qualifying/defining what the preposition should be. This mentality caused overfitting issues during the classification, and it could not classify beyond "live in Japan".  After resolving the overfitted issue, the classifier started to show accuracy between 0.7 and 0.9. It shows the training model behavior: more sample data, better the accuracy. 
+When finding tokens with the ER tags such as GTE (a tag for countries and cities like "Japan")  or NORP (a tag for nationality like "Japanese"), I was looking for phrases like "live in Japan" by checking POS patterns of Verb + Preposition + GTE token. With typical programming attitude to strive for 100% code coverage, I was even qualifying/defining what the preposition should be. This mentality caused overfitting issues during the classification, and it could not classify beyond "live in Japan".  After resolving the overfitted issue, the classifier started to show accuracy between 0.7 and 0.9. It shows the training model behavior: more sample data, better the accuracy. 
 
 ### Future implementation and extension
 1. Although there is a hook to support different cuisines, it must include corpus to define the appropriate countries of the cuisines and their cities.
 
-2. I need to investigate if we have enough self-proclaimed authenticity experts in the production environment. If not, the overall ratings remain the same without reflecting authenticity consideration.  
+2. More rubost input interface for feeding data. Currently it takes CSV files with 3 double-quoted fields (i.e., reviewer, text, and rating) separated by comma. 
+
+3. I need to investigate if we have enough self-proclaimed authenticity experts in the production environment. If not, the overall ratings remain the same without reflecting authenticity consideration.  
 
 ## Contribution
 Produced for a class project by C. Miklasevich, an MCS-DS student at UIUC
