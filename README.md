@@ -99,7 +99,7 @@ According to the displayed classifying samples, try typing your text to see how 
 ## Overview
 
 ### Motivation and Goal of this project:
-When choosing restaurants, I always rely on Yelp ratings. The most ratings are helpful; however, when it comes to my native country's food, some of the highly rated restaurants are not quite authentic enough for my native palate. For Yelp users who seek true authentic cuisine experiences, I hope to provide different ratings or adjusted ratings based on the self-proclaimed experts in consideration of the cuisine authenticity.
+When choosing restaurants, I always rely on Yelp ratings. The most ratings are helpful; however, when it comes to my native country's food, some of the highly rated restaurants are not quite authentic enough for my native palate. For Yelp users who seek true authentic cuisine experiences, I hope to provide different ratings or adjusted ratings based on the reviewers who have the first-hand experience in the cuisine. These reviewers are referred as the self-proclaimed Cuisine Authenticity experts in this project.
 
 ## Implementation Notes
 
